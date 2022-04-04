@@ -1,0 +1,44 @@
+<h2 class="text-center">Регистрация</h2>
+<p-card>
+  <form class="form" autocomplete="off" [formGroup]="form" (ngSubmit)="submit($event)">
+    <div class="field flex align-items-center justify-content-center">
+      <span class="label"><i class="pi pi-user"></i></span>
+      <span class="p-float-label">
+        <input id="name" required name="name" type="text" pInputText formControlName="name">
+        <label for="name">Ваше имя*</label>
+      </span>
+    </div>
+
+    <div class="field flex align-items-center justify-content-center">
+      <span class="label"><i class="pi pi-at"></i></span>
+      <span class="p-float-label">
+        <input id="email" required name="new-email" type="email" pInputText formControlName="email" autocomplete="new-email">
+        <label for="email">Почтовый адрес*</label>
+        <div class="errors" *ngIf="email.errors && (email.dirty && email.touched)">
+          <small id="email-help1" class="p-error" *ngIf="email.errors?.email">Невалидный почтовый адрес.</small>
+          <small id="email-help2" class="p-error" *ngIf="false">Этот почтовый адрес уже зарегистрирован. </small>
+        </div>
+      </span>
+    </div>
+
+    <div class="field flex align-items-center justify-content-center">
+      <span class="label"><i class="pi pi-key"></i></span>
+      <span class="p-float-label">
+        <input id="pass" required name="new-password" type="password" pInputText formControlName="pass" autocomplete="new-password">
+        <label for="pass">Пароль*</label>
+        <div class="errors">
+          <small id="password-help" class="p-error" *ngIf="pass.errors && (pass.dirty && pass.touched)">
+            Пароль должен быть не менее 6 символов
+          </small>
+        </div>
+      </span>
+    </div>
+
+    <div class="text-center">
+      <button type="submit" class="p-button">
+        <span>Отправить</span>
+        <i class="pi pi-send"></i>
+      </button>
+    </div>
+  </form>
+</p-card>

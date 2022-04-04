@@ -1,0 +1,15 @@
+.layout {
+  min-height: calc(100vh - 58px);
+}
+
+// Buttons
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+button {
+  span + i {
+    margin-left: 10px;
+  }
+}
