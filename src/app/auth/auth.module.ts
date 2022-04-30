@@ -1,30 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '@shared';
 
-
-import { AuthLayoutComponent } from './layout/authLayout.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
+import { LayoutComponent } from './layout/layout.component';
+import { AuthComponent } from './pages/auth/auth.component';
 
 @NgModule({
   declarations: [
-    AuthLayoutComponent,
-    LoginComponent,
-    RegisterComponent
+    LayoutComponent,
+    AuthComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule.forChild([
-      {
-        path: '', component: AuthLayoutComponent, children: [
-          {path: '', pathMatch: 'full', redirectTo: '/auth/join'},
-          {path: 'login', component: LoginComponent, data: {title: 'Вход'}},
-          {path: 'join', component: RegisterComponent, data: {title: 'Регистрация'}}
-        ]
-      }
+    RouterModule.forChild([{
+      path: '',
+      children: [
+        { path: '', pathMatch: 'full', redirectTo: '/auth/join' },
+        { path: 'login', component: AuthComponent, data: {title: 'Вход'} },
+        { path: 'join', component: AuthComponent, data: {title: 'Регистрация'} },
+        { path: 'reset', component: AuthComponent, data: {title: 'Восстановление пароля'} }
+      ]}
     ]),
   ]
 })

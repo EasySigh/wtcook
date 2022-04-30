@@ -3,6 +3,12 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "~/*": ["src/*"],
+      "@shared": ["./src/app/shared/index.ts"],
+      "@const": ["./src/app/constants"],
+      "@utils": ["./src/app/shared/utils/index.ts"]
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": false,

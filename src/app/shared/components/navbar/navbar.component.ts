@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MenuItem, PrimeIcons } from 'primeng/api';
+import { Component, Inject } from '@angular/core';
+import { NAVBAR_ITEMS } from '@const';
 
 @Component({
   selector: 'wt-navbar',
@@ -7,8 +7,5 @@ import { MenuItem, PrimeIcons } from 'primeng/api';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  public items: MenuItem[] = [
-    {label: 'Вход', routerLink: '/auth/login', icon: PrimeIcons.SIGN_IN},
-    {label: 'Регистрация', routerLink: '/auth/join', icon: PrimeIcons.PENCIL}
-  ];
+  constructor(@Inject(NAVBAR_ITEMS) public items: any) {}
 }
