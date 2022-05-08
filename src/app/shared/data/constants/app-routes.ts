@@ -1,24 +1,25 @@
-import { RIGHTS as access } from '~/app/shared/data/models/user';
+import { AvailableFor, NavbarRoute } from '../models';
 
-export const APP_ROUTES: any[] = [
-  {label: 'Админ', routerLink: '/dashboard/public', icon: '', role: access.admin},
-  {label: 'Модератор', routerLink: '/dashboard/public', icon: '', role: access.moderator},
-  {label: 'Сообщество', routerLink: '/dashboard/public', icon: '', role: access.user},
-  {label: 'Блюда', icon: '', role: access.user, items: [
-      {label: 'Список', routerLink: '/dashboard/dishes/list', icon: ''},
-      {label: 'Создать новое', routerLink: '/dashboard/dishes/new', icon: ''},
+export const APP_ROUTES: NavbarRoute[] = [
+  {title: 'Админ', url: '/dashboard/public', icon: null, access: AvailableFor.ADMIN},
+  {title: 'Модератор', url: '/dashboard/public', icon: null, access: AvailableFor.MODERATOR},
+  {title: null, url: '/dashboard/public', icon: 'people', access: AvailableFor.USER},
+  {title: null, url: '/dashboard/public', icon: 'public', access: AvailableFor.USER},
+  {title: 'Блюда', icon: null, access: AvailableFor.USER, children: [
+      {title: 'Список', url: '/dashboard/dishes/list', icon: 'list'},
+      {title: 'Создать новое', url: '/dashboard/dishes/new', icon: 'playlist_add'},
     ]},
-  {label: 'Подборки', icon: '', role: access.user, items: [
-      {label: 'Список', routerLink: '/dashboard/collections/list', icon: ''},
-      {label: 'Создать новую', routerLink: '/dashboard/collections/new', icon: ''},
+  {title: 'Подборки', icon: null, access: AvailableFor.USER, children: [
+      {title: 'Список', url: '/dashboard/collections/list', icon: 'list'},
+      {title: 'Создать новую', url: '/dashboard/collections/new', icon: 'playlist_add'},
     ]},
-  {label: 'Профиль', icon: '', role: access.user, items: [
-      {label: 'Моя страница', routerLink: '/dashboard/profile/:id', icon: ''},
-      {label: 'Настройки', routerLink: '/dashboard/profile/preferences', icon: ''},
-      {label: 'Статистика', routerLink: '/dashboard/statistics/history', icon: ''},
-      {label: 'Инструкции', routerLink: '/dashboard/profile/guides', icon: ''},
-      {label: 'Выход', routerLink: '/', icon: ''}
+  {title: null, icon: 'person', access: AvailableFor.USER, children: [
+      {title: 'Моя страница', url: '/dashboard/profile/:id', icon: 'person_outlined'},
+      {title: 'Настройки', url: '/dashboard/profile/preferences', icon: 'settings'},
+      {title: 'Статистика', url: '/dashboard/statistics/history', icon: 'equalizer'},
+      {title: 'Инструкции', url: '/dashboard/profile/guides', icon: 'info_outlined'},
+      {title: 'Выход', url: '/', icon: null}
     ]},
-  {label: 'Вход', routerLink: '/auth/login', icon: '', role: access.guest},
-  {label: 'Регистрация', routerLink: '/auth/join', icon: '', role: access.guest}
+  {title: 'Вход', url: '/auth/login', icon: null, access: AvailableFor.GUEST},
+  {title: 'Регистрация', url: '/auth/join', icon: null, access: AvailableFor.GUEST}
 ];

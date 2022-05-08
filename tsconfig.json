@@ -5,9 +5,10 @@
     "baseUrl": "./",
     "paths": {
       "~/*": ["src/*"],
-      "@shared": ["./src/app/shared/index.ts"],
-      "@const": ["./src/app/constants"],
-      "@utils": ["./src/app/shared/utils/index.ts"]
+      "@shared/*": ["./src/app/shared/*"],
+      "@store/*": ["./src/app/store/*"],
+      "@appState/*": ["./src/app/store/appState/*"],
+      "@const": ["./src/app/constants"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

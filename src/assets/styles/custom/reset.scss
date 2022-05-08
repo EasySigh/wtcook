@@ -1,9 +1,0 @@
-html, body, .wrapper { height: 100%; }
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-.wrapper { background-color: var(--surface-100); }
-.grid { max-width: 100%; }  // PrimeFlex fix
-

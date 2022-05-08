@@ -1,0 +1,18 @@
+// Bootstrap configurations
+@import "bootstrap-4-grid/scss/grid/functions";
+@import "bootstrap-4-grid/scss/grid/variables";
+@import "variables";
+
+// Bootstrap Mixins
+@import "bootstrap-4-grid/scss/grid/mixins/breakpoints";
+@import "bootstrap-4-grid/scss/grid/mixins/grid-framework";
+@import "bootstrap-4-grid/scss/grid/mixins/grid";
+
+// Bootstrap styles
+@import "bootstrap-4-grid/scss/grid/grid";
+@import "bootstrap-4-grid/scss/grid/utilities/display";
+@import "bootstrap-4-grid/scss/grid/utilities/flex";
+@import "bootstrap-4-grid/scss/sizing/utilities/sizing";
+@import "text";
+@import "spacing"; // Reduced version (without media queries).
+//@import "bootstrap-4-grid/scss/grid/utilities/spacing"; // Full version

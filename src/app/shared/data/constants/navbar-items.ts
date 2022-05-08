@@ -1,13 +1,19 @@
-import { InjectionToken } from '@angular/core';
-import { UserRight } from '~/app/shared/data/models/user';
-import { APP_ROUTES } from '~/app/shared/data/constants/app-routes';
+import { inject, InjectionToken } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { selectFilter } from '@appState/appState.selectors';
 
-export const NAVBAR_ITEMS = new InjectionToken<any[]>('NAVBAR_ITEMS', {
+import { NavbarRoute } from '@shared/data/models';
+import { APP_ROUTES } from './app-routes';
+
+
+export const NAVBAR_ITEMS = new InjectionToken<Observable<NavbarRoute[]>>('NAVBAR_ITEMS', {
   providedIn: 'root',
   factory: () => {
-    // @TODO needs to get data from the store
-    const userRole: number = UserRight[localStorage.getItem('role')?.toUpperCase()] || 0;
-    return APP_ROUTES.filter(item => userRole & item.role);
+    const availableRoutes$ = inject(Store).select('appState');
+    return availableRoutes$.pipe(
+        select(selectFilter),
+        map(filter => APP_ROUTES.filter(item => filter ? filter & item.access : !item.access))
+      );
   }
 });
-

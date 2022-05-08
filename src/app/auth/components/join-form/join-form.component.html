@@ -1,0 +1,36 @@
+<form class="d-flex flex-column" [formGroup]="form">
+  <mat-form-field appearance="standard" class="w-50 mx-auto">
+    <mat-label>Имя</mat-label>
+    <input matInput type="text" name="name" placeholder="Тётя Мотя" formControlName="name">
+    <mat-error *ngIf="form.get('name').hasError('required')">
+      Это поле <strong>не может</strong> быть пустым
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard" class="w-50 mx-auto">
+    <mat-label>Почтовый адрес</mat-label>
+    <input matInput type="email" name="email" placeholder="your@email.com" formControlName="email">
+    <mat-error *ngIf="form.get('email').hasError('email')">
+      Почтовый адрес <strong>не валиден</strong>
+    </mat-error>
+    <mat-error *ngIf="form.get('email').hasError('required')">
+      Это поле <strong>не может</strong> быть пустым
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard" class="w-50 mx-auto">
+    <mat-label>Пароль</mat-label>
+    <input matInput type="password" name="password" placeholder="" formControlName="password">
+    <mat-error *ngIf="form.get('password').hasError('minlength')">
+      Пароль должен быть <strong>не менее 6 символов</strong>
+    </mat-error>
+    <mat-error *ngIf="form.get('password').hasError('required')">
+      Это поле <strong>не может</strong> быть пустым
+    </mat-error>
+  </mat-form-field>
+
+  <div class="d-flex justify-content-between py-1">
+    <a [routerLink]="['/', 'auth', 'login']" mat-flat-button class="font-weight-light">Уже есть аккаунт?</a>
+    <button mat-button color="primary" [disabled]="!form.valid" (click)="submit()">Войти</button>
+  </div>
+</form>

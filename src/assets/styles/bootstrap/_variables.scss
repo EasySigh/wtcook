@@ -1,0 +1,19 @@
+$spacer: 1rem;
+$spacers: ();
+$spacers: map-merge(
+    (
+      0: 0,
+      1: ($spacer * .5),
+      2: ($spacer),
+      3: ($spacer * 1.5)
+    ),
+    $spacers
+);
+
+$grid-breakpoints: (
+  xs: 0,
+  //sm: 576px,
+  //md: 768px,
+  //lg: 992px,
+  xl: 1200px
+);

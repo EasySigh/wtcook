@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { filter, Observable } from 'rxjs';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter, Observable, tap } from 'rxjs';
+import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 @Injectable({
@@ -15,15 +15,12 @@ export class TitleService {
   ) { }
 
   /**
-   * Subscribe on Router Event and set HTML Document Title
+   * Set HTML Document Title on router NavigationEnd event.
    */
-  public setRouteTitle(): void {
-    this.onRouteChange().subscribe(() => this.setTitle())
-  }
-
-  private onRouteChange(): Observable<any> {
+  public onRouteChange(): Observable<Event> {
     return this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
+      filter(event => event instanceof NavigationEnd),
+      tap(this.setTitle.bind(this))
     );
   }
 

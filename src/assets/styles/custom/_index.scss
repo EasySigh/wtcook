@@ -1,6 +1,7 @@
-@import 'reset';
+// Common extra classes
 @import 'assets';
-@import 'typography';
-@import 'colors';
-@import 'forms';
-@import 'global';
+
+// For Shared components
+@import 'components/form';
+@import 'components/button';
+

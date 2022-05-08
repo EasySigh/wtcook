@@ -1,0 +1,27 @@
+@use '@angular/material' as mat;
+@import "variables/dark-variables";
+
+// Define «Dark Theme» palette
+$wt-primary: mat.define-palette(mat.$pink-palette);
+$wt-accent: mat.define-palette(mat.$grey-palette);
+
+// Define a «Dark Theme»
+$wt-theme: mat.define-dark-theme((
+  color: (
+    primary: $wt-primary,
+    accent: $wt-accent
+  )
+));
+
+// Apply styles for used «Material Components» only
+@include mat.core-theme($wt-theme);
+@include mat.toolbar-theme($wt-theme);
+@include mat.menu-theme($wt-theme);
+@include mat.button-theme($wt-theme);
+@include mat.card-theme($wt-theme);
+@include mat.progress-bar-theme($wt-theme);
+@include mat.form-field-theme($wt-theme);
+@include mat.input-theme($wt-theme);
+@include mat.snack-bar-theme($wt-theme);
+
+//@include mat.all-component-themes($wt-theme);
