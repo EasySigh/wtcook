@@ -1,0 +1,11 @@
+<section class="carousel">
+  <div class="items" [style.transform]="transform">
+    <div
+      class="item"
+      [ngStyle]="display | getStyles"
+      *ngFor="let item of items; let i = index"
+    >
+      <ng-container [ngTemplateOutlet]="item.tpl"></ng-container>
+    </div>
+  </div>
+</section>

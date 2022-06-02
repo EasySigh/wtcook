@@ -1,1 +1,26 @@
-<p>collections-list works!</p>
+<wt-view [viewConfig]="config"></wt-view>
+
+<div *wtListViewDetails="let item=item">
+  <article class="d-flex w-100 py-3">
+    <img
+      [src]="item.image?.length ? item.image : 'assets/media/food_cap.png'"
+      [alt]="item.title + 'image'"
+      style="width: 250px;height: 180px;margin-right: 30px;"
+    >
+    <section class="d-flex flex-column" style="flex: 1;">
+      <h3>{{item.title}}</h3>
+      <p style="max-height: 120px;overflow: hidden;">{{item.description || 'Описание отсутствует'}}</p>
+      <div class="actions ml-auto mt-auto">
+        <button mat-icon-button [routerLink]="[item.id]">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </section>
+  </article>
+</div>

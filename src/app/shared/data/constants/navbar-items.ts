@@ -10,8 +10,8 @@ import { APP_ROUTES } from './app-routes';
 export const NAVBAR_ITEMS = new InjectionToken<Observable<NavbarRoute[]>>('NAVBAR_ITEMS', {
   providedIn: 'root',
   factory: () => {
-    const availableRoutes$ = inject(Store).select('appState');
-    return availableRoutes$.pipe(
+    const appState$ = inject(Store).select('appState');
+    return appState$.pipe(
         select(selectFilter),
         map(filter => APP_ROUTES.filter(item => filter ? filter & item.access : !item.access))
       );

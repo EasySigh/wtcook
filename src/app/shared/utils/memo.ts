@@ -2,7 +2,7 @@ import { NotVoid } from '@shared/data/models';
 
 
 /**
- * Memoize «not void» function.
+ * ### Memoize «not void» function.
  */
 export function memoize<F extends (...args: any[]) => ReturnType<F>>(f: NotVoid<F>): () => ReturnType<F> {
   const cacheLookup = {};

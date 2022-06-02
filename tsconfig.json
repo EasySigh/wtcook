@@ -8,7 +8,8 @@
       "@shared/*": ["./src/app/shared/*"],
       "@store/*": ["./src/app/store/*"],
       "@appState/*": ["./src/app/store/appState/*"],
-      "@const": ["./src/app/constants"]
+      "@const": ["./src/app/constants"],
+      "@dashboard/*": ["./src/app/dashboard/*"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

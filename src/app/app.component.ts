@@ -6,7 +6,7 @@ import { UiThemeService } from '@shared/services/ui-theme.service';
   selector: 'wt-root',
   template: `
     <wt-navbar></wt-navbar>
-    <mat-progress-bar *wtPreloader="0" mode="indeterminate" color="accent"></mat-progress-bar>
+    <div style="height: 64px;"></div>
     <router-outlet></router-outlet>
   `
 })
@@ -16,6 +16,6 @@ export class AppComponent {
     private readonly uiService: UiThemeService
   ) {
     uiService.UITheming().subscribe();
-    titleService.onRouteChange().subscribe();
+    titleService.displayCurrentTitle().subscribe();
   }
 }

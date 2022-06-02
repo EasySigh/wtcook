@@ -1,0 +1,38 @@
+table.mat-table {
+  width: 100%;
+  tr.detail-row {
+    height: 0;
+  }
+
+  tr.element-row {
+    cursor: pointer;
+    transition: background-color .2s;
+  }
+
+  tr.element-row:not(.expanded-row):hover {
+    background-color: var(--secondary-hover);
+  }
+
+  tr.element-row:not(.expanded-row):active {
+    background-color: var(--secondary-active);
+  }
+
+  .element-row td {
+    border-bottom-width: 0;
+  }
+
+  .element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+
+  .element-description {
+    padding: 16px;
+  }
+
+  .element-description-attribution {
+    opacity: 0.5;
+  }
+}
+
+

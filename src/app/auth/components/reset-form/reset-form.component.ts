@@ -18,12 +18,7 @@ export class ResetFormComponent {
   }
 
   private showSnackBar(message, action?, duration = 5000): Observable<void> {
-    const snackBarRef = this._snackbar.open(
-      message,
-      action,
-      {duration}
-    );
-
+    const snackBarRef = this._snackbar.open(message, action, {duration});
     return snackBarRef.onAction().pipe(take(1));
   }
 }

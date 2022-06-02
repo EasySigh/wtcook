@@ -1,5 +1,5 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { ComponentPortal, Portal } from '@angular/cdk/portal';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { ActivatedRoute, Data } from '@angular/router';
 import { FORMS } from '~/app/auth/data/constants';
 
@@ -9,7 +9,7 @@ import { FORMS } from '~/app/auth/data/constants';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthComponent implements OnInit {
-  public selectedView: Portal<any>;
+  public selectedView: ComponentPortal<any>;
   public readonly routeData: Data = this.route.snapshot.data;
 
   constructor(
@@ -21,3 +21,4 @@ export class AuthComponent implements OnInit {
     this.selectedView = new ComponentPortal(this.forms.get(this.routeData.name));
   }
 }
+// @TODO remove MatCardmodule and make in with plain HTML

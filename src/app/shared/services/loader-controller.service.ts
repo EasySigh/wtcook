@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatestWith, map, Observable } from 'rxjs';
+import { Observable, BehaviorSubject, map, combineLatestWith } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '@appState/appState.reducer';
 import { selectLoading } from '@appState/appState.selectors';
@@ -8,7 +8,7 @@ import { selectLoading } from '@appState/appState.selectors';
   providedIn: 'root'
 })
 export class LoaderControllerService {
-  public isLoading$: Observable<boolean>;
+  private isLoading$: Observable<boolean>;
   private readonly _loaderIds = new BehaviorSubject([]);
 
   constructor(private readonly store: Store<{ appState: AppState }>) {
@@ -29,10 +29,10 @@ export class LoaderControllerService {
 
   public getLoaderState(id: number): Observable<boolean> {
     return this.isLoading$.pipe(
-      combineLatestWith(this._loaderIds.asObservable()),
-      map(([isLoading, loaderIds]) => {
-        return [isLoading, id === Math.max(...loaderIds)].every(state => state === true);
-      })
+      combineLatestWith(this._loaderIds),
+      map(([isLoading, loaderIds]) =>
+        [isLoading, id === Math.max(...loaderIds)].every(state => state === true)
+      )
     )
   }
 }

@@ -1,5 +1,5 @@
 import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
-import { Observable, take, tap } from 'rxjs';
+import { filter, Observable, startWith, take, tap } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { UITheme } from '@shared/data/models/ui';
 import { select, Store } from '@ngrx/store';
@@ -26,28 +26,34 @@ export class UiThemeService {
     this.theme$ = this.store.select('appState').pipe(select(selectTheme));
   }
 
+  private static isValidTheme(theme: any): boolean {
+    return UITheme.DEFAULT === theme || UITheme.DARK === theme;
+  }
+
+  private static get systemTheme(): UITheme {
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return isDark ? UITheme.DARK : UITheme.DEFAULT;
+  }
+
+  private static get lsTheme(): UITheme | null {
+    const lsTheme = localStorage.getItem('theme') as UITheme;
+    return UiThemeService.isValidTheme(lsTheme) ? lsTheme : null;
+  }
+
   public UITheming(): Observable<UITheme> {
-    this.themeInit();
+    const initialValue = UiThemeService.lsTheme || UiThemeService.systemTheme;
 
     return this.theme$.pipe(
+      startWith(initialValue),
+      filter(value => UiThemeService.isValidTheme(value)),
       tap(theme => this.setCssLink(theme))
     );
   }
 
-  public setTheme(theme?: UITheme): void {
-    if (!theme) {
-      this.switchTheme().subscribe();
-      return;
-    }
-    this.store.dispatch(setTheme({theme}));
-    localStorage.setItem('theme', theme);
-  }
-
-  private themeInit(): void {
-    const lsTheme = localStorage.getItem('theme') as UITheme;
-    const isThemeSaved = [UITheme.DEFAULT, UITheme.DARK].some(k => k.includes(lsTheme));
-
-    this.setTheme(isThemeSaved ? lsTheme : UITheme.DEFAULT);
+  public updateTheme(theme?: UITheme): void {
+    theme
+      ? this.store.dispatch( setTheme({theme}) )
+      : this.switchTheme().subscribe();
   }
 
   private switchTheme(): Observable<UITheme> {
@@ -55,12 +61,13 @@ export class UiThemeService {
       .pipe(
         take(1),
         tap(theme =>
-          this.setTheme([UITheme.DEFAULT, UITheme.DARK].find(k => k !== theme))
+          this.updateTheme([UITheme.DEFAULT, UITheme.DARK].find(k => k !== theme))
         )
       )
   }
 
   private async setCssLink(theme: UITheme) {
+    localStorage.setItem('theme', theme);
     await this.loadCss(`${theme}.css`);
 
     if (this.themeLinks.length == 2)

@@ -1,0 +1,15 @@
+<div class="grid" *ngIf="(items$ | async)?.length; else message">
+  <mat-card
+    class="grid-item action text-center py-4"
+    *ngFor="let item of items$ | async; trackBy itemId"
+    [routerLink]="[item.id]"
+  >
+    <mat-card-title>{{item.title}}</mat-card-title>
+    <div class="divider"></div>
+    <mat-card-content>{{item.description | slice:0:92}}</mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #message>
+  No items found
+</ng-template>

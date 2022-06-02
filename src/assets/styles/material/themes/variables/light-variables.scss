@@ -1,4 +1,8 @@
-body {
-  --input-bgc: white;
-  --input-color: black;
+:root {
+  --primary: #009688;
+  --text-color: black;
+  --secondary-color: white;
+  --secondary-hover: rgba(0,0,0,.04);
+  --secondary-active: rgba(0,0,0,.09);
+  --inactive-color: rgba(0,0,0,.3);
 }

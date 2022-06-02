@@ -13,11 +13,11 @@ export interface AppState {
 }
 
 const user: UserData = {
-  id: '123',
+  id: '1',
   name: 'Noname',
   email: 'empty@gmail.com',
   isEmailApproved: false,
-  role: UserRole.GUEST,
+  role: UserRole.USER,
   rating: null,
   createdAt: new Date(),
   lastSeen: new Date(),
@@ -31,7 +31,7 @@ const user: UserData = {
 export const initialState: AppState = {
   user,
   ui: {
-    theme: UITheme.DEFAULT,
+    theme: null,
     filter: UserRight[user.role],
     isLoading: false
   }
@@ -60,7 +60,8 @@ export const appStateReducer = createReducer(
   on(setUser, (state, {user}) => (
     {
       ...state,
-      user: {...state.user, ...user}
+      user: {...state.user, ...user},
+      ui: {...state.ui, filter: UserRight[user.role]}
     }
   ))
 );

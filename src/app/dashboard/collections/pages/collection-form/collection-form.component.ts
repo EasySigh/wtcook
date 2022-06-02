@@ -1,0 +1,12 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'wt-collection-form',
+  templateUrl: './collection-form.component.html',
+  styleUrls: ['./collection-form.component.scss']
+})
+export class CollectionFormComponent {
+
+  constructor() { }
+
+}
