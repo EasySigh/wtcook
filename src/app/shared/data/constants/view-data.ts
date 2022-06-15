@@ -5,6 +5,7 @@ export interface ViewData {
   id: string | number;
   title: string;
   description: string;
+  menu: number[];
   createdAt: Date;
 }
 

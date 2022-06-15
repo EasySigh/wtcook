@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatRippleModule } from '@angular/material/core';
+import { NgxTippyModule } from 'ngx-tippy-wrapper';
 import { WtViewModule } from '@shared/components';
 import { WtCarouselModule } from '@shared/components';
 
@@ -12,7 +14,6 @@ import { CollectionComponent } from '../pages/collection/collection.component';
 
 import { COLLECTIONS_ROUTES } from '@dashboard/collections/modules/routes';
 import { collectionsReducer } from '@store/dashboard/collections/collections.reducer';
-
 
 
 @NgModule({
@@ -24,8 +25,10 @@ import { collectionsReducer } from '@store/dashboard/collections/collections.red
     CommonModule,
     WtViewModule,
     WtCarouselModule,
+    NgxTippyModule,
     MatIconModule,
     MatButtonModule,
+    MatRippleModule,
     StoreModule.forFeature('collections', collectionsReducer),
     RouterModule.forChild(COLLECTIONS_ROUTES),
   ]

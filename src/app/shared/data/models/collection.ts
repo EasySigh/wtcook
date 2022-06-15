@@ -10,5 +10,11 @@ export interface Collection {
   createdAt: Date,
   public: boolean,
   parent: NullAble<string>,
-  dishes: Dish[]
+  dishes: DishRef[]
+}
+
+export interface DishRef {
+  id: number,
+  analogs: number[],
+  time: Date
 }

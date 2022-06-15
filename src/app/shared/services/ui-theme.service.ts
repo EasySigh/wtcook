@@ -3,26 +3,26 @@ import { filter, Observable, startWith, take, tap } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { UITheme } from '@shared/data/models/ui';
 import { select, Store } from '@ngrx/store';
-import { AppState } from '@store/appState/appState.reducer';
 import { setTheme } from '@store/appState/appState.actions';
 import { selectTheme } from '@store/appState/appState.selectors';
+import { AppState } from '@store/appState/appState.reducer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UiThemeService {
   private readonly theme$: Observable<UITheme>;
-  private readonly _renderer: Renderer2;
+  private readonly renderer: Renderer2;
   private readonly head: HTMLElement;
   private themeLinks: HTMLElement[] = [];
 
   constructor(
-    rendererFactory: RendererFactory2,
+    private readonly rendererFactory: RendererFactory2,
     @Inject(DOCUMENT) document: Document,
-    private store: Store<{ appState: AppState }>
+    private readonly store: Store<{ appState: AppState }>
   ) {
     this.head = document.head;
-    this._renderer = rendererFactory.createRenderer(null, null);
+    this.renderer = rendererFactory.createRenderer(null, null);
     this.theme$ = this.store.select('appState').pipe(select(selectTheme));
   }
 
@@ -41,6 +41,7 @@ export class UiThemeService {
   }
 
   public UITheming(): Observable<UITheme> {
+    this.initFavicon();
     const initialValue = UiThemeService.lsTheme || UiThemeService.systemTheme;
 
     return this.theme$.pipe(
@@ -66,22 +67,28 @@ export class UiThemeService {
       )
   }
 
+  private initFavicon(): void {
+    const darkIconPath = UiThemeService.systemTheme === UITheme.DARK ? 'assets/' : '';
+    const el = this.head.querySelector('link[type="image/x-icon"]');
+    this.renderer.setAttribute(el, 'href', `${darkIconPath}favicon.ico`);
+  }
+
   private async setCssLink(theme: UITheme) {
     localStorage.setItem('theme', theme);
     await this.loadCss(`${theme}.css`);
 
     if (this.themeLinks.length == 2)
-      this._renderer.removeChild(this.head, this.themeLinks.shift());
+      this.renderer.removeChild(this.head, this.themeLinks.shift());
   }
 
   private async loadCss(filename: string): Promise<void> {
     return new Promise(resolve => {
-      const linkEl: HTMLElement = this._renderer.createElement('link');
-      this._renderer.setAttribute(linkEl, 'rel', 'stylesheet');
-      this._renderer.setAttribute(linkEl, 'type', 'text/css');
-      this._renderer.setAttribute(linkEl, 'href', filename);
-      this._renderer.setProperty(linkEl, 'onload', resolve);
-      this._renderer.appendChild(this.head, linkEl);
+      const linkEl: HTMLElement = this.renderer.createElement('link');
+      this.renderer.setAttribute(linkEl, 'rel', 'stylesheet');
+      this.renderer.setAttribute(linkEl, 'type', 'text/css');
+      this.renderer.setAttribute(linkEl, 'href', filename);
+      this.renderer.setProperty(linkEl, 'onload', resolve);
+      this.renderer.appendChild(this.head, linkEl);
       this.themeLinks = [...this.themeLinks, linkEl];
     })
   }

@@ -11,9 +11,10 @@ export const reducers: ActionReducerMap<State> = {
 
 export const selectCollectionState = createFeatureSelector<fromCollections.CollectionsState>('collections');
 
+
 export const selectCollectionIds = createSelector(
   selectCollectionState,
-  fromCollections.selectCollectionsIds // shorthand for CollectionsState => fromCollection.selectCollectionIds(CollectionsState)
+  fromCollections.selectCollectionsIds
 );
 export const selectCollectionEntities = createSelector(
   selectCollectionState,
@@ -31,9 +32,9 @@ export const selectCurrentCollectionId = createSelector(
   selectCollectionState,
   fromCollections.getSelectedCollectionId
 );
-
 export const selectCurrentCollection = createSelector(
   selectCollectionEntities,
   selectCurrentCollectionId,
-  (CollectionEntities, CollectionId) => CollectionId && CollectionEntities[CollectionId]
+  (CollectionEntities, CollectionId) =>
+    ('number' === typeof CollectionId) && CollectionEntities[CollectionId]
 );

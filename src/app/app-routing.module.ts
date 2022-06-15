@@ -16,9 +16,9 @@ const routes: Routes = [
     {path: '', pathMatch: 'full', redirectTo: 'collections'},
     {path: 'collections', loadChildren: () => import('@dashboard/collections/modules/collections.module').then(m => m.CollectionsModule)},
     {path: 'collection', loadChildren: () => import('./dashboard/collections/modules/collections-form.module').then(m => m.CollectionsFormModule)},
-    {path: 'profile', loadChildren: () => import('./dashboard/profile/profile.module').then(m => m.ProfileModule)},
-    {path: 'dishes', loadChildren: () => import('./dashboard/dishes/dishes.module').then(m => m.DishesModule)},
+    {path: 'dishes', loadChildren: () => import('@dashboard/dishes/modules/dishes.module').then(m => m.DishesModule)},
     {path: 'public', loadChildren: () => import('./dashboard/public/public.module').then(m => m.PublicModule)},
+    {path: 'profile', loadChildren: () => import('./dashboard/profile/profile.module').then(m => m.ProfileModule)},
     {path: 'statistics', loadChildren: () => import('./dashboard/statistics/statistics.module').then(m => m.StatisticsModule)}
   ]},
 ];

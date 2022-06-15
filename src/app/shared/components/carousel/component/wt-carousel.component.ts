@@ -8,6 +8,7 @@ import {
   QueryList
 } from '@angular/core';
 import { WtCarouselItemDirective } from '../wt-carousel-item.directive';
+import { memoize } from '@shared/utils';
 
 @Component({
   selector: 'wt-carousel',
@@ -23,30 +24,32 @@ export class WtCarouselComponent {
   readonly items: QueryList<WtCarouselItemDirective> = new QueryList<WtCarouselItemDirective>();
 
   constructor(private readonly change: ChangeDetectorRef) {
+    WtCarouselComponent.clamp = memoize(WtCarouselComponent.clamp);
+    WtCarouselComponent.calcTranslate = memoize(WtCarouselComponent.calcTranslate);
+  }
+
+  public next = () => this.updateIndex(this.index + 1);
+  public prev = () => this.updateIndex(this.index - 1);
+
+  public get transform(): string {
+    const x = WtCarouselComponent.calcTranslate(this.index, this.display, this.items.length);
+    return `translateX(${100 * x * this.display}%)`;
   }
 
   private static clamp(value: number, min: number, max: number): number {
     return Math.min(max, Math.max(min, value));
   }
 
-  private get calcTranslate(): number {
-    const oneItemSize = 1 / this.display / 10 * 2;
-    const restItems = this.items.length - (this.index * this.display);
+  private static calcTranslate(index: number, display: number, amount: number): number {
+    const oneItemSize = 1 / display / 10 * 2;
+    const restItems = amount - (index * display);
 
-    if (!this.items.length) return -((-this.index + 1) / this.display - oneItemSize * restItems);
+    if (!amount) return -((-index + 1) / display - oneItemSize * restItems);
 
-    return restItems < this.display
-      ? (-this.index + 1) / this.display - oneItemSize * restItems
-      : -this.index / this.display;
+    return restItems < display
+      ? (-index + 1) / display - oneItemSize * restItems
+      : -index / display;
   }
-
-  public get transform(): string {
-    const x = this.calcTranslate;
-    return `translateX(${100 * x * this.display}%)`;
-  }
-
-  public next = () => this.updateIndex(this.index + 1);
-  public prev = () => this.updateIndex(this.index - 1);
 
   private updateIndex(index: number): void {
     this.change.markForCheck();
@@ -55,5 +58,4 @@ export class WtCarouselComponent {
       ? this.index = 0
       : this.index = WtCarouselComponent.clamp(index, 0, screens - 1);
   }
-
 }

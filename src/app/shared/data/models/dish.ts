@@ -4,7 +4,7 @@ export interface Dish {
   id: number,
   title: string,
   recipe?: NullAble<JSON>,
-  photos: string[],
+  image: string,
   public: boolean,
   createdAt: Date
 }

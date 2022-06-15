@@ -5,17 +5,17 @@ import { PortalModule } from '@angular/cdk/portal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { WtPreloaderModule } from '@shared/directives';
 
 import { AuthComponent } from './pages/auth/auth.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { JoinFormComponent } from './components/join-form/join-form.component';
 import { ResetFormComponent } from './components/reset-form/reset-form.component';
 
-import { WtPreloaderModule } from '@shared/directives';
 import { FormType } from '~/app/auth/data/models';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { FormType } from '~/app/auth/data/models';
     AuthComponent,
     LoginFormComponent,
     JoinFormComponent,
-    ResetFormComponent,
+    ResetFormComponent
   ],
   imports: [
     CommonModule,

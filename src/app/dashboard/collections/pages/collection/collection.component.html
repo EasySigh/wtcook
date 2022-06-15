@@ -1,20 +1,28 @@
-<div class="row wt-h-100 align-items-start">
+<div class="row wt-h-100 align-items-start" *ngIf="collection$ | async as collection">
   <article class="col-12 d-flex card-bg">
-    <img [src]="item?.image || 'assets/media/food_cap.png'" alt="Collection image" style="width: 300px">
+    <img [src]="collection?.image || 'assets/media/food_cap.png'" alt="" style="width: 300px">
     <section class="ml-4">
-      <h1>Name</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+      <h1>{{collection.title}}</h1>
+      <p>{{collection.description}}</p>
     </section>
   </article>
 
   <section class="col-12 carousel-wrapper mt-auto">
-    <button mat-mini-fab class="carousel-btn" (click)="carousel.prev()">
+    <button mat-mini-fab color="secondary" class="carousel-btn" (click)="carousel.prev()">
       <mat-icon>navigate_before</mat-icon>
     </button>
 
     <wt-carousel #carousel [display]="5">
       <ng-container *ngFor="let dish of dishes; let i = index">
-        <div *wtCarouselItem class="card-bg dish-slide">
+        <div
+          *wtCarouselItem
+          mat-ripple
+          class="card-bg dish-slide"
+          [routerLink]="'/dashboard/dishes/'+dish.id"
+          [tippyName]="dish.id"
+          [tippyProps]="tippyConfig"
+          [ngxTippy]="dish.time ? tippyContent : null"
+        >
           <img *ngIf="dish.image; else cap" [src]="dish.image" alt="">
           <ng-template #cap><mat-icon>photo</mat-icon></ng-template>
           {{dish.name || 'Неизвестно'}}
@@ -22,8 +30,41 @@
       </ng-container>
     </wt-carousel>
 
-    <button mat-mini-fab class="carousel-btn" (click)="carousel.next()">
+    <button mat-mini-fab color="secondary" class="carousel-btn" (click)="carousel.next()">
       <mat-icon>navigate_next</mat-icon>
     </button>
   </section>
 </div>
+
+<ng-template #tippyContent let-id>
+  <div class="text-center mt-1">
+    Время:<span class="ml-1 text-primary">{{getDish(id).time}}</span>
+  </div>
+
+  <h4 class="text-center">Возможные аналоги:</h4>
+  <div class="carousel-wrapper">
+    <button mat-mini-fab color="secondary" class="carousel-btn" (click)="innerCarousel.prev()">
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+
+    <wt-carousel #innerCarousel [display]="1" style="width: 200px;">
+      <ng-container *ngFor="let item of getAnalogs(id); let i = index;">
+        <div
+          *wtCarouselItem
+          mat-ripple
+          class="justify-content-center card-bg dish-slide"
+          [routerLink]="'/dashboard/dishes/'+item.id"
+        >
+          <img [src]="item.image || 'assets/media/food_cap.png'" alt="Collection image">
+          <div class="ml-2 my-auto">
+            <span class="">{{item.name}}</span>
+          </div>
+        </div>
+      </ng-container>
+    </wt-carousel>
+
+    <button mat-mini-fab color="secondary" class="carousel-btn" (click)="innerCarousel.next()">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+  </div>
+</ng-template>

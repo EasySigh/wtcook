@@ -5,22 +5,13 @@ import { Collection, NullAble } from '@shared/data/models';
 
 import { fakeCollectionsData } from './temp';
 
-// TODO refactor this shit
 export interface CollectionsState extends EntityState<Collection> {
   selectedCollectionId: NullAble<number>
 }
 
-export function selectCollectionId(c: Collection): number {
-  return c.id;
-}
-
-export function sortByDate(a: Collection, b: Collection): number {
-  return +(a.createdAt > b.createdAt);
-}
-
 export const adapter: EntityAdapter<Collection> = createEntityAdapter<Collection>({
-  selectId: selectCollectionId,
-  sortComparer: sortByDate
+  selectId: c => c.id,
+  sortComparer: (a, b) => a.title.localeCompare(b.title)
 });
 
 export const initialState: CollectionsState = adapter.getInitialState(fakeCollectionsData);
@@ -71,10 +62,14 @@ export const collectionsReducer = createReducer(
   }),
   on(CollectionsActions.clearCollections, state => {
     return adapter.removeAll({ ...state, selectedCollectionId: null });
+  }),
+  on(CollectionsActions.setCurrentCollectionId, (state, {id}) => {
+    return {...state, selectedCollectionId: +id}
+  }),
+  on(CollectionsActions.setCurrentCollection, (state, {collection}) => {
+    return {...state, selectedCollectionId: collection.id}
   })
 );
-
-export const getSelectedCollectionId = (state: CollectionsState) => state.selectedCollectionId;
 
 const {
   selectIds,
@@ -82,6 +77,9 @@ const {
   selectAll,
   selectTotal,
 } = adapter.getSelectors();
+
+// get current (selected) collection id
+export const getSelectedCollectionId = (state: CollectionsState) => state.selectedCollectionId;
 
 // select the array of collections ids
 export const selectCollectionsIds = selectIds;

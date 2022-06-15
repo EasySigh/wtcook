@@ -1,5 +1,6 @@
 <div class="grid" *ngIf="(items$ | async)?.length; else message">
   <mat-card
+    mat-ripple
     class="grid-item action text-center py-4"
     *ngFor="let item of items$ | async; trackBy itemId"
     [routerLink]="[item.id]"

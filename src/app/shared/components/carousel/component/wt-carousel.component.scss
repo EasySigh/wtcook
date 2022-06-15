@@ -22,6 +22,7 @@
 .items {
   display: flex;
   align-items: center;
+  padding: 3px 0;
 
   :host.animate & {
     @include transition(transform)

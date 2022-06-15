@@ -5,25 +5,62 @@ export const fakeCollectionsData = {
     0: {
       id: 0,
       title: 'Пример',
-      image: '../../assets/media/temp/collection.jpg',
+      image: 'assets/media/temp/collection.jpg',
       description: 'There are plenty of tips here for meal planners: slow cooker dishes that can be prepped ' +
         'the night before, sauces that can be mixed a day or two ahead of serving',
       public: false,
       parent: null,
       createdAt: new Date('Tue April 5 2022 18:05:16 GMT+0300 (Eastern European Summer Time)'),
-      dishes: []
+      dishes: [
+        {
+          id: 1,
+          analogs: [2, 1, 5, 6],
+          time: new Date()
+        },
+        {
+          id: 3,
+          analogs: [4],
+          time: new Date()
+        },
+        {
+          id: 6,
+          analogs: [5, 3, 4],
+          time: new Date()
+        },
+        {
+          id: 2,
+          analogs: [6, 0],
+          time: new Date()
+        }
+      ]
     },
     1: {
       id: 1,
       title: 'Понедельник',
-      image: '',
+      image: 'assets/media/temp/collection.jpg',
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, laboriosam! ' +
         'The getSelectors method returned by the created entity adapter provides ' +
         'functions for selecting information from the entity.',
       public: false,
       parent: null,
       createdAt: new Date('Tue April 9 2022 18:05:16 GMT+0300 (Eastern European Summer Time)'),
-      dishes: []
+      dishes: [
+        {
+          id: 0,
+          analogs: [6, 2],
+          time: new Date()
+        },
+        {
+          id: 2,
+          analogs: [5, 4, 1],
+          time: new Date()
+        },
+        {
+          id: 1,
+          analogs: [6, 0, 2],
+          time: new Date()
+        }
+      ]
     },
     2: {
       id: 2,
@@ -33,7 +70,38 @@ export const fakeCollectionsData = {
       public: false,
       parent: null,
       createdAt: new Date('Tue April 20 2022 18:05:16 GMT+0300 (Eastern European Summer Time)'),
-      dishes: []
+      dishes: [
+        {
+          id: 6,
+          analogs: [2, 1, 5, 6],
+          time: new Date()
+        },
+        {
+          id: 7,
+          analogs: [4],
+          time: new Date()
+        },
+        {
+          id: 3,
+          analogs: [6, 1, 4],
+          time: new Date()
+        },
+        {
+          id: 1,
+          analogs: [5, 2],
+          time: new Date()
+        },
+        {
+          id: 2,
+          analogs: [3, 1, 4],
+          time: new Date()
+        },
+        {
+          id: 0,
+          analogs: [6, 0],
+          time: new Date()
+        }
+      ]
     },
     3: {
       id: 3,
@@ -43,7 +111,23 @@ export const fakeCollectionsData = {
       public: false,
       parent: null,
       createdAt: new Date('Tue May 1 2022 18:05:16 GMT+0300 (Eastern European Summer Time)'),
-      dishes: []
+      dishes: [
+        {
+          id: 1,
+          analogs: [2, 0, 6],
+          time: new Date()
+        },
+        {
+          id: 3,
+          analogs: [4, 5, 1],
+          time: new Date()
+        },
+        {
+          id: 6,
+          analogs: [3, 2, 1],
+          time: new Date()
+        }
+      ]
     },
     4: {
       id: 4,
@@ -53,7 +137,28 @@ export const fakeCollectionsData = {
       public: false,
       parent: null,
       createdAt: new Date('Tue May 5 2022 18:05:16 GMT+0300 (Eastern European Summer Time)'),
-      dishes: []
+      dishes: [
+        {
+          id: 1,
+          analogs: [2, 1, 5, 6],
+          time: new Date()
+        },
+        {
+          id: 3,
+          analogs: [4],
+          time: new Date()
+        },
+        {
+          id: 6,
+          analogs: [5, 3, 4],
+          time: new Date()
+        },
+        {
+          id: 2,
+          analogs: [6, 0],
+          time: new Date()
+        }
+      ]
     },
     5: {
       id: 5,
@@ -64,7 +169,28 @@ export const fakeCollectionsData = {
       public: false,
       parent: null,
       createdAt: new Date('Tue May 6 2022 18:05:16 GMT+0300 (Eastern European Summer Time)'),
-      dishes: []
+      dishes: [
+        {
+          id: 1,
+          analogs: [2, 1, 5, 6],
+          time: new Date()
+        },
+        {
+          id: 3,
+          analogs: [4],
+          time: new Date()
+        },
+        {
+          id: 6,
+          analogs: [5, 3, 4],
+          time: new Date()
+        },
+        {
+          id: 2,
+          analogs: [6, 0],
+          time: new Date()
+        }
+      ]
     },
     6: {
       id: 6,
@@ -74,7 +200,28 @@ export const fakeCollectionsData = {
       public: false,
       parent: null,
       createdAt: new Date('Tue May 10 2022 18:05:16 GMT+0300 (Eastern European Summer Time)'),
-      dishes: []
+      dishes: [
+        {
+          id: 1,
+          analogs: [2, 1, 5, 6],
+          time: new Date()
+        },
+        {
+          id: 3,
+          analogs: [4],
+          time: new Date()
+        },
+        {
+          id: 6,
+          analogs: [5, 3, 4],
+          time: new Date()
+        },
+        {
+          id: 2,
+          analogs: [6, 0],
+          time: new Date()
+        }
+      ]
     },
     7: {
       id: 7,
@@ -86,7 +233,28 @@ export const fakeCollectionsData = {
       public: false,
       parent: null,
       createdAt: new Date('Tue May 15 2022 18:05:16 GMT+0300 (Eastern European Summer Time)'),
-      dishes: []
+      dishes: [
+        {
+          id: 1,
+          analogs: [2, 1, 5, 6],
+          time: new Date()
+        },
+        {
+          id: 3,
+          analogs: [4],
+          time: new Date()
+        },
+        {
+          id: 6,
+          analogs: [5, 3, 4],
+          time: new Date()
+        },
+        {
+          id: 2,
+          analogs: [6, 0],
+          time: new Date()
+        }
+      ]
     }
   },
 };

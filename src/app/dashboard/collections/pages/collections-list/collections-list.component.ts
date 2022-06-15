@@ -23,10 +23,10 @@ import { VIEW_DATA } from '@const';
 })
 export class CollectionsListComponent {
   public config: ViewConfig = {
-    defaultView: 'list',
+    defaultView: 'card',
     itemsPerPage: 10,
     itemsLength$: this.store.select(selectCollectionTotal),
-    columns: ['title', 'description', 'createdAt']
+    columns: ['title', 'menu', 'createdAt']
   };
 
   constructor(private readonly store: Store) {}

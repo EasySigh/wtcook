@@ -1,7 +1,7 @@
 <div class="d-flex flex-column wt-h-100">
   <div class="actions text-right">
-    <button mat-icon-button (click)="view = 'list'"><mat-icon [ngClass]="{'active': isListView}">list</mat-icon></button>
-    <button mat-icon-button (click)="view = 'card'"><mat-icon [ngClass]="{'active': !isListView}">view_module</mat-icon></button>
+    <button mat-icon-button (click)="view = 'list'" [ngClass]="{'active': isListView}"><mat-icon>list</mat-icon></button>
+    <button mat-icon-button (click)="view = 'card'" [ngClass]="{'active': !isListView}"><mat-icon>view_module</mat-icon></button>
   </div>
 
   <wt-list-view *ngIf="isListView; else cardView" [columns]="viewConfig.columns"></wt-list-view>

@@ -128,6 +128,7 @@
   },
   "defaultProject": "wtcook",
   "cli": {
+    "analytics": "34de93c9-487a-4603-ab8f-a4a3aa87d966",
     "defaultCollection": "@angular-eslint/schematics"
   }
 }

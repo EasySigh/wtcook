@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
+import { NgxTippyModule } from 'ngx-tippy-wrapper';
 import { WtNavbarModule } from '@shared/components';
 
 import { AppComponent } from './app.component';
@@ -13,6 +14,7 @@ import { registerLocaleData } from '@angular/common';
 import { appStateReducer } from '@store/appState/appState.reducer';
 import { environment } from '~/environments/environment';
 import localeRu from '@angular/common/locales/ru';
+
 
 registerLocaleData(localeRu);
 
@@ -25,6 +27,7 @@ registerLocaleData(localeRu);
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    NgxTippyModule,
     WtNavbarModule,
     StoreModule.forRoot({appState: appStateReducer}),
     StoreDevtoolsModule.instrument({
